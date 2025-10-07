@@ -4,9 +4,15 @@ FROM php:8.1-apache
 # Set the working directory to the web root
 WORKDIR /var/www/html
 
+# --- FIX: INSTALL cURL DEPENDENCIES BEFORE INSTALLING THE PHP EXTENSION ---
+# Update package lists and install the cURL development library
+RUN apt-get update && \
+    apt-get install -y libcurl4-openssl-dev && \
+    rm -rf /var/lib/apt/lists/*
+# -------------------------------------------------------------------------
+
 # Copy all project files into the web root
 COPY . /var/www/html
 
-# The standard PHP Apache image is usually configured to start the web server
-# You can ensure the required PHP extensions are installed for cURL, though they are often default
+# Install the PHP cURL extension (this will now succeed)
 RUN docker-php-ext-install curl
