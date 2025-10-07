@@ -1,5 +1,5 @@
 (function() {
-    const BASE_URL = 'https://chatbot-production-1e84.up.railway.app/';
+    const BASE_URL = 'https://chatbot-production-1e94.up.railway.app/';
     const BASE_ASSET_URL = BASE_URL + 'assets/';
     // =================================================================
     // 1. EMBEDDED CSS, HTML, and Global Dependencies
@@ -645,7 +645,7 @@ html, body {
             this.isTyping = false;
             this.inputEnabled = false;
             // NOTE: Use relative paths for endpoints if they are on the same server
-            const BASE_API_URL = 'https://chatbot-production-1e84.up.railway.app/'; 
+            const BASE_API_URL = 'https://chatbot-production-1e94.up.railway.app/'; 
         
             this.apiBaseUrl = BASE_API_URL + 'chat.php'; 
             this.saveAppointmentUrl = BASE_API_URL + 'save_appointment.php'; 
