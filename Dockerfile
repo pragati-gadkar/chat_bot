@@ -33,5 +33,3 @@ COPY . /var/www/html
 
 # CRITICAL FIX B: Set correct ownership so the Apache user (www-data) can read/execute all files
 RUN chown -R www-data:www-data /var/www/html
-
-# Final command inherited from base image will start Apache and serve the PHP files.
