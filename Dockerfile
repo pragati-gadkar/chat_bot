@@ -10,7 +10,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install curl
 
-# --- 2. CONFIGURE WEB SERVER & PERMISSIONS (CRITICAL FIXES) ---
+# --- 2. CONFIGURE WEB SERVER & PERMISSIONS ---
 
 # Enable the Apache Rewrite Module 
 RUN a2enmod rewrite
@@ -20,16 +20,18 @@ RUN mkdir -p /var/www/html/data && \
     chown -R www-data:www-data /var/www/html/data && \
     chmod -R 775 /var/www/html/data
 
-# --- 3. COPY APPLICATION FILES & APPLY OWNERSHIP ---
+# --- 3. COPY APPLICATION FILES & APPLY OWNERSHIP (CRITICAL FIXES) ---
 
-# Copy all project files, including 000-default.conf and .htaccess, to the web root
+# Copy all project files into the web root (This includes your 000-default.conf)
 COPY . /var/www/html
 
 # CRITICAL FIX B: Set correct ownership for all files
 RUN chown -R www-data:www-data /var/www/html
 
-# CRITICAL FIX C: Copy the custom Apache config file to the correct location and enable it.
-# NOTE: The default configuration is in sites-enabled, which points to sites-available.
-# We copy the new config file and then enable it.
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-RUN a2ensite 000-default.conf && a2dissite 000-default.conf # Disable the default config, enable ours
+# CRITICAL FIX C: Copy custom Apache config and enable it. 
+# We copy the config from /var/www/html/000-default.conf 
+# to the Apache directory and then enable it, disabling the default one.
+RUN cp /var/www/html/000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN a2ensite 000-default.conf && a2dissite 000-default.conf
+
+# Restart Apache (or rely on the default container CMD to start it with new config)
