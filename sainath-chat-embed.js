@@ -7,7 +7,7 @@
 
     // PASTE THE MINIFIED CONTENT OF style.css HERE
     const WIDGET_CSS = `
-   /* Reset + base */
+  /* Reset + base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     font-family: 'Roboto', sans-serif;
@@ -645,10 +645,12 @@ html, body {
             this.isTyping = false;
             this.inputEnabled = false;
             // NOTE: Use relative paths for endpoints if they are on the same server
-            const BASE_API_URL = 'https://chatbot-production-1e94.up.railway.app/'; 
-        
-            this.apiBaseUrl = 'https://chatbot-production-1e94.up.railway.app/chat.php'; 
-            this.saveAppointmentUrl = 'https://chatbot-production-1e94.up.railway.app/save_appointment.php'; 
+            const BASE_URL = 'https://chatbot-production-1e94.up.railway.app/'; 
+            // ...
+
+            // ✅ Corrected API URL assignment:
+            this.apiBaseUrl = BASE_URL + 'chat.php'; // Concatenate base + filename
+            this.saveAppointmentUrl = BASE_URL + 'save_appointment.php'; // Concatenate base + filename
             this.appointmentStep = 0;
             this.appointmentData = {};
 
