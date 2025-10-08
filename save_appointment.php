@@ -11,7 +11,7 @@ if (!$data || !isset($data["name"], $data["contact"], $data["reason"])) {
     exit;
 }
 
-$file = "appointments.csv";
+$file = __DIR__ . "/data/appointments.csv";
 
 // Create file with headers if not exists
 if (!file_exists($file)) {
