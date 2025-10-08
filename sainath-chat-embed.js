@@ -644,11 +644,9 @@ html, body {
             this.messages = [];
             this.isTyping = false;
             this.inputEnabled = false;
-            // NOTE: Use relative paths for endpoints if they are on the same server
-            const BASE_API_URL = 'https://chatbot-production-1e94.up.railway.app/'; 
         
-            this.apiBaseUrl = BASE_API_URL + 'chat.php'; 
-            this.saveAppointmentUrl = BASE_API_URL + 'save_appointment.php'; 
+            this.apiBaseUrl = 'https://chatbot-production-1e94.up.railway.app/chat.php'; 
+            this.saveAppointmentUrl = BASE_API_URL + 'https://chatbot-production-1e94.up.railway.app/save_appointment.php'; 
             this.appointmentStep = 0;
             this.appointmentData = {};
 
