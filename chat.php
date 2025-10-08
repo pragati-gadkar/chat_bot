@@ -25,8 +25,8 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30); 
 
 // ✅ Force cURL to verify SSL certificates correctly (common issue in Docker/cloud)
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 // Optional: If you find an issue with the trusted CA bundle, you might try disabling peer verification, 
 // but this is highly discouraged for security: curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // --- END: Production cURL Configuration ---
