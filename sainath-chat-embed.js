@@ -1,6 +1,6 @@
 (function() {
     // =================================================================
-    // 0. ABSOLUTE PATH DEFINITIONS (CRITICAL FIX)
+    // 0. ABSOLUTE PATH DEFINITIONS (CRITICAL FIXES)
     // =================================================================
     // THIS MUST BE THE CORRECT, LIVE RAILWAY DOMAIN
     const BASE_URL = 'https://chatbot-production-1e94.up.railway.app/';
