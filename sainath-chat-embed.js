@@ -1,6 +1,11 @@
 (function() {
+    // =================================================================
+    // 0. ABSOLUTE PATH DEFINITIONS (CRITICAL FIX)
+    // =================================================================
+    // THIS MUST BE THE CORRECT, LIVE RAILWAY DOMAIN
     const BASE_URL = 'https://chatbot-production-1e94.up.railway.app/';
     const BASE_ASSET_URL = BASE_URL + 'assets/';
+    
     // =================================================================
     // 1. EMBEDDED CSS, HTML, and Global Dependencies
     // =================================================================
@@ -530,14 +535,14 @@ html, body {
     // PASTE THE ENTIRE CHAT WIDGET HTML HERE (from index.html)
     const WIDGET_HTML = `
       <div class="chat-toggle" id="chatToggle" title="Open chat">
-        <img src="assets/chat bot icon.png" alt="Sainath Chatbot" />
+        <img src="${BASE_ASSET_URL}chat bot icon.png" alt="Sainath Chatbot" />
       </div>
       <div class="app-container" id="chatContainer">
         <div class="chat-container">
           <div class="chat-header" data-testid="chat-header">
             <div class="header-content">
               <div class="hospital-logo-container">
-                <img src="assets/hospital icon.png" alt="Sainath Hospital" class="hospital-logo" />
+                <img src="${BASE_ASSET_URL}hospital icon.png" alt="Sainath Hospital" class="hospital-logo" />
               </div>
               <div class="header-text">
                 <div class="hospital-name">Sainath Care</div>
@@ -560,7 +565,7 @@ html, body {
             <button class="header-button" id="closeChat">✖</button>
           </div>
           <div class="doctor-profile" data-testid="doctor-profile">
-            <img src="assets/doctor-circle.png" alt="Professional doctor" class="doctor-avatar" />
+            <img src="${BASE_ASSET_URL}doctor-circle.png" alt="Professional doctor" class="doctor-avatar" />
           </div>
           <div class="chat-messages" data-testid="chat-messages" id="chatMessages"></div>
           <div class="message-input-area" data-testid="message-input-area">
@@ -568,7 +573,7 @@ html, body {
               <input type="text" id="messageInput" placeholder="Type your question..."
                      class="message-input" disabled data-testid="message-input" />
               <button class="send-button" id="sendButton" disabled data-testid="send-button">
-                <img src="assets/send-message.png" alt="Send" class="send-icon" />
+                <img src="${BASE_ASSET_URL}send-message.png" alt="Send" class="send-icon" />
               </button>
             </div>
           </div>
@@ -597,7 +602,7 @@ html, body {
         bubble.textContent = text;
         const icon = document.createElement("div");
         icon.className = "user-icon";
-        icon.innerHTML = `<img src="assets/user-icon.png" alt="You" />`;
+        icon.innerHTML = `<img src="${BASE_ASSET_URL}user-icon.png" alt="You" />`;
         wrapper.appendChild(bubble);
         wrapper.appendChild(icon);
         return wrapper;
@@ -609,7 +614,7 @@ html, body {
         wrapper.className = "message bot";
         const icon = document.createElement("div");
         icon.className = "bot-icon";
-        icon.innerHTML = `<img src="assets/bot icon.png" alt="Sainath Bot" />`;
+        icon.innerHTML = `<img src="${BASE_ASSET_URL}bot icon.png" alt="Sainath Bot" />`;
         const bubble = document.createElement("div");
         bubble.className = "chat-bubble-bot chat-bubble-animated";
         bubble[isHTML ? "innerHTML" : "textContent"] = text;
@@ -626,7 +631,7 @@ html, body {
         wrapper.className = "message bot typing-message";
         const icon = document.createElement("div");
         icon.className = "bot-icon";
-        icon.innerHTML = `<img src="assets/bot icon.png" alt="Sainath Bot" />`;
+        icon.innerHTML = `<img src="${BASE_ASSET_URL}bot icon.png" alt="Sainath Bot" />`;
         const bubble = document.createElement("div");
         bubble.className = "typing-indicator chat-bubble-animated";
         bubble.innerHTML = `<span></span><span></span><span></span>`;
@@ -644,13 +649,10 @@ html, body {
             this.messages = [];
             this.isTyping = false;
             this.inputEnabled = false;
-            // NOTE: Use relative paths for endpoints if they are on the same server
-            const BASE_URL = 'https://chatbot-production-1e94.up.railway.app/'; 
-            // ...
-
-            // ✅ Corrected API URL assignment:
-            this.apiBaseUrl = BASE_URL + 'chat.php'; // Concatenate base + filename
-            this.saveAppointmentUrl = BASE_URL + 'save_appointment.php'; // Concatenate base + filename
+            
+            // ✅ API URL assignment using the global BASE_URL
+            this.apiBaseUrl = BASE_URL + 'chat.php'; 
+            this.saveAppointmentUrl = BASE_URL + 'save_appointment.php'; 
             this.appointmentStep = 0;
             this.appointmentData = {};
 
