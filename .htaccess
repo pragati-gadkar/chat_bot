@@ -1,0 +1,15 @@
+# Force Apache to use the PHP interpreter for these file extensions
+# This ensures that when someone requests /chat.php, it is processed correctly.
+<FilesMatch "\.(php|save_appointment|chat)$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+
+# Optional: This rule may be needed if the deployment URL structure is complex
+# and is often used to ensure correct routing.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If the file exists, serve it
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Otherwise, ensure direct file access to PHP files is handled
+    RewriteRule ^(.*)$ $1 [L,QSA]
+</IfModule>
